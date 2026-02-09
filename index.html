@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Biohazard Store</title>
 
   <!-- VK Bridge -->
@@ -19,7 +19,6 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: fixed;
 
       display: flex;
       align-items: center;
@@ -29,53 +28,41 @@
     .wrap {
       width: 100%;
       max-width: 420px;
-      padding: 40px 24px;
+      padding: 32px 24px;
+      margin: 16px;
 
-      background: rgba(0,0,0,0.45);
+      background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(6px);
-      border-radius: 24px;
-
+      border-radius: 20px;
       text-align: center;
     }
 
     .logo {
-      font-size: 42px;
+      font-size: 36px;
       font-weight: 800;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .sub {
-      font-size: 16px;
+      font-size: 15px;
       opacity: 0.85;
-      margin-bottom: 36px;
-      line-height: 1.4;
+      margin-bottom: 28px;
     }
 
     .btn {
       width: 100%;
-      padding: 18px 0;
-      margin-bottom: 16px;
+      padding: 18px 16px;
+      margin: 14px 0;
 
-      border: none;
-      border-radius: 16px;
-
-      background: #b00020;
-      color: #fff;
-
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
 
+      color: #fff;
+      background: #b3001b;
+      border: none;
+      border-radius: 14px;
       cursor: pointer;
-      transition: transform .08s ease, background .15s ease;
-    }
-
-    .btn:last-child {
-      margin-bottom: 0;
-    }
-
-    .btn:hover {
-      background: #c40024;
     }
 
     .btn:active {
@@ -87,39 +74,51 @@
 <body>
   <div class="wrap">
     <div class="logo">Biohazard Store</div>
-
     <div class="sub">
       Коллекционки · Фигурки · Игровой мерч · Статуи
     </div>
 
-    <button class="btn" onclick="go('https://vk.com/market-225423128?screen=group')">
-      КАТАЛОГ
-    </button>
-
-    <button class="btn" onclick="go('https://vk.com/reviews-225423128')">
-      ОТЗЫВЫ
-    </button>
-
-    <button class="btn" onclick="go('https://vk.com/market-225423128?section=album_4')">
-      ПРЕДЗАКАЗЫ
-    </button>
-
-    <button class="btn" onclick="go('https://vk.com/im?entrypoint=community_page&tab=all&sel=-225423128')">
-      КОНТАКТЫ
-    </button>
+    <button class="btn" onclick="goCatalog()">КАТАЛОГ</button>
+    <button class="btn" onclick="goReviews()">ОТЗЫВЫ</button>
+    <button class="btn" onclick="goPreorders()">ПРЕДЗАКАЗЫ</button>
+    <button class="btn" onclick="goContacts()">КОНТАКТЫ</button>
   </div>
 
   <script>
-  vkBridge.send('VKWebAppInit');
+    vkBridge.send('VKWebAppInit');
 
-  function go(url) {
-    vkBridge.send('VKWebAppOpenURL', {
-      url: url,
-      target: 'external'
-    }).catch(() => {
-      window.open(url, '_blank');
-    });
-  }
-</script>
+    // 🔧 НАСТРОЙКИ (ЕСЛИ НУЖНО — СКАЖИ, Я ПОМЕНЯЮ)
+    const GROUP_ID = 225432128;          // без минуса
+    const OWNER_ID = -225432128;         // с минусом
+    const PREORDER_ALBUM = 4;            // номер альбома предзаказов
+
+    function goCatalog() {
+      vkBridge.send('VKWebAppOpenURL', {
+        url: `https://vk.com/market${OWNER_ID}`,
+        target: 'external'
+      });
+    }
+
+    function goReviews() {
+      vkBridge.send('VKWebAppOpenURL', {
+        url: `https://vk.com/reviews${OWNER_ID}`,
+        target: 'external'
+      });
+    }
+
+    function goPreorders() {
+      vkBridge.send('VKWebAppOpenURL', {
+        url: `https://vk.com/market${OWNER_ID}?section=album_${PREORDER_ALBUM}`,
+        target: 'external'
+      });
+    }
+
+    function goContacts() {
+      vkBridge.send('VKWebAppOpenURL', {
+        url: `https://vk.com/im?sel=${OWNER_ID}`,
+        target: 'external'
+      });
+    }
+  </script>
 </body>
 </html>
