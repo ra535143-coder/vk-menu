@@ -110,12 +110,16 @@
   </div>
 
   <script>
-    vkBridge.send('VKWebAppInit');
+  vkBridge.send('VKWebAppInit');
 
-    function go(url) {
-      vkBridge.send('VKWebAppOpenURL', { url })
-        .catch(() => window.location.href = url);
-    }
-  </script>
+  function go(url) {
+    vkBridge.send('VKWebAppOpenURL', {
+      url: url,
+      target: 'external'
+    }).catch(() => {
+      window.open(url, '_blank');
+    });
+  }
+</script>
 </body>
 </html>
