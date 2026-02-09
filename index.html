@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Biohazard Store — Меню</title>
+  <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
+  <style>
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
+      background:linear-gradient(180deg,#0f0f0f,#1b1b1b);
+      color:#fff;
+    }
+    .wrap{
+      max-width:520px;
+      margin:0 auto;
+      padding:20px;
+    }
+    .logo{
+      font-size:38px;
+      font-weight:800;
+      text-align:center;
+      margin-top:10px;
+    }
+    .sub{
+      text-align:center;
+      opacity:.75;
+      margin:8px 0 22px;
+    }
+    .btn{
+      width:100%;
+      padding:17px 14px;
+      margin:12px 0;
+      border:none;
+      border-radius:12px;
+      background:#b1002a;
+      color:#fff;
+      font-size:18px;
+      font-weight:700;
+      letter-spacing:.5px;
+      cursor:pointer;
+    }
+    .btn:active{transform:scale(.98)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="logo">Biohazard Store</div>
+    <div class="sub">Коллекционные фигурки и предзаказы</div>
+
+    <button class="btn" onclick="go('https://vk.com/market-225423128?screen=group')">
+      КАТАЛОГ
+    </button>
+
+    <button class="btn" onclick="go('https://vk.com/reviews-225423128')">
+      ОТЗЫВЫ
+    </button>
+
+    <button class="btn" onclick="go('https://vk.com/market-225423128?section=album_4')">
+      ПРЕДЗАКАЗЫ
+    </button>
+
+    <button class="btn" onclick="go('https://vk.com/im/convo/-225423128?entrypoint=community_page&tab=all')">
+      КОНТАКТЫ
+    </button>
+  </div>
+
+  <script>
+    vkBridge.send('VKWebAppInit');
+
+    function go(url){
+      vkBridge.send('VKWebAppOpenURL', { url })
+        .catch(() => window.location.href = url);
+    }
+  </script>
+</body>
+</html>
