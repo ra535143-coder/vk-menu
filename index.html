@@ -2,58 +2,84 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Biohazard Store — Меню</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Biohazard Store — меню</title>
+
+  <!-- VK Bridge -->
   <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 
   <style>
     body {
-  margin: 0;
-  font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
-  background-image: url("2026-02-09_18-56-12.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: #fff;
-}
-    .wrap{
-      max-width:520px;
-      margin:0 auto;
-      padding:20px;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+      color: #fff;
+
+      /* ФОН */
+      background-image: url("A_digital_background_abstract_background_features_.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
-    .logo{
-      font-size:38px;
-      font-weight:800;
-      text-align:center;
-      margin-top:10px;
+
+    .wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 40px 20px;
+
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 24px;
     }
-    .sub{
-      text-align:center;
-      opacity:.75;
-      margin:8px 0 22px;
+
+    .logo {
+      font-size: 44px;
+      font-weight: 800;
+      text-align: center;
+      margin-top: 30px;
     }
-    .btn{
-      width:100%;
-      padding:17px 14px;
-      margin:12px 0;
-      border:none;
-      border-radius:12px;
-      background:#b1002a;
-      color:#fff;
-      font-size:18px;
-      font-weight:700;
-      letter-spacing:.5px;
-      cursor:pointer;
+
+    .sub {
+      text-align: center;
+      opacity: 0.85;
+      font-size: 16px;
+      margin: 12px 0 32px;
     }
-    .btn:active{transform:scale(.98)}
+
+    .btn {
+      width: 100%;
+      padding: 22px 16px;
+      margin: 14px 0;
+
+      background: #b00020;
+      color: #fff;
+
+      border: none;
+      border-radius: 14px;
+
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+
+      cursor: pointer;
+      transition: transform 0.1s ease, opacity 0.1s ease;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
     <div class="logo">Biohazard Store</div>
-    <div class="sub"> Коллекционки | Фигурки | Игровой мерч | Статуи </div>
+    <div class="sub">
+      Коллекционки | Фигурки | Игровой мерч | Статуи
+    </div>
 
     <button class="btn" onclick="go('https://vk.com/market-225423128?screen=group')">
       КАТАЛОГ
@@ -75,7 +101,7 @@
   <script>
     vkBridge.send('VKWebAppInit');
 
-    function go(url){
+    function go(url) {
       vkBridge.send('VKWebAppOpenURL', { url })
         .catch(() => window.location.href = url);
     }
